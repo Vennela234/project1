@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Order Summary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      padding: 30px;
+    }
+
+    .summary-box {
+      background: white;
+      padding: 25px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    img {
+      width: 160px;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .details {
+      margin-top: 20px;
+    }
+
+    .details h2 {
+      margin-bottom: 8px;
+    }
+
+    .summary {
+      margin-top: 20px;
+      font-size: 1.1rem;
+    }
+
+    .summary p {
+      margin: 5px 0;
+    }
+
+    .thanks {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="summary-box" id="summaryBox">
+    <h1>Order Summary</h1>
+    <img id="bookImg" src="" alt="Book Cover" />
+    <div class="details">
+      <h2 id="bookTitle">Book Title</h2>
+      <p id="bookAuthor">Author Name</p>
+    </div>
+
+    <div class="summary">
+      <p>Unit Price: $<span id="unitPrice">0.00</span></p>
+      <p>Quantity: <span id="qty">1</span></p>
+      <p>Total: $<span id="totalPrice">0.00</span></p>
+    </div>
+
+    <div class="thanks">Thank you for your purchase! 📚</div>
+
+ <div> <br>  <a href="index.html" class="btn">Go back To book store</a></div>
+  </div>
+
+
+  <script>
+    function loadOrder() {
+      const bookData = localStorage.getItem("selectedBook");
+      if (!bookData) {
+        document.getElementById("summaryBox").innerHTML = "<p>No book selected.</p>";
+        return;
+      }
+
+      const book = JSON.parse(bookData);
+      const quantity = localStorage.getItem("bookQuantity") || 1;
+      const unitPrice = parseFloat(book.price);
+      const total = (unitPrice * quantity).toFixed(2);
+
+      document.getElementById("bookImg").src = book.imgSrc;
+      document.getElementById("bookTitle").textContent = book.title;
+      document.getElementById("bookAuthor").textContent = book.author;
+      document.getElementById("unitPrice").textContent = unitPrice.toFixed(2);
+      document.getElementById("qty").textContent = quantity;
+      document.getElementById("totalPrice").textContent = total;
+    }
+
+    loadOrder();
+  </script>
+</body>
+</html>

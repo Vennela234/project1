@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Bookstore</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .buy-btn {
+      background-color: #3b82f6;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .book-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">📚 Book Palace</div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="#">Books</a></li>
+        <li><a href="#">Categories</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Welcome to Book Palace</h1>
+    <p>Your favorite place to explore new worlds</p>
+    <a href="#" class="btn">Browse Books</a>
+  </section>
+
+  <section class="featured">
+    <h2>Featured Books</h2>
+    <div class="book-grid">
+      <div class="book-card">
+        <img src="encan.jpeg" alt="Book 1" />
+        <h3>Encanto</h3>
+        <p>by Meloni Maggara</p>
+        <button class="buy-btn" onclick='buyBook("Encanto", "Meloni Maggara", "encan.jpeg", 12.25)'>Buy Now</button>
+      </div>
+      <div class="book-card">
+        <img src="greg.jpeg" alt="Book 2" />
+        <h3>1984</h3>
+        <p>by George Orwell</p>
+        <button class="buy-btn" onclick='buyBook("1984", "George Orwell", "greg.jpeg", 12.50)'>Buy Now</button>
+      </div>
+      <div class="book-card">
+        <img src="great.jpeg" alt="Book 3" />
+        <h3>The Great Gatsby</h3>
+        <p>by F. Scott Fitzgerald</p>
+        <button class="buy-btn" onclick='buyBook("The Great Gatsby", "F. Scott Fitzgerald", "great.jpeg", 10.99)'>Buy Now</button>
+      </div>
+      <div class="book-card">
+        <img src="thor.jpeg" alt="Book 4" />
+        <h3>Thor and the Dark World</h3>
+        <p>by Stan Lee</p>
+        <button class="buy-btn" onclick='buyBook("Thor and the Dark World", "Stan Lee", "thor.jpeg", 18.25)'>Buy Now</button>
+      </div>
+      <div class="book-card">
+        <img src="mockingbird.jpeg" alt="Book 5" />
+        <h3>To Kill a Mockingbird</h3>
+        <p>by Harper Lee</p>
+        <button class="buy-btn" onclick='buyBook("To Kill a Mockingbird", "Harper Lee", "mockingbird.jpeg", 11.25)'>Buy Now</button>
+      </div>
+      <div class="book-card">
+        <img src="raya.jpeg" alt="Book 6" />
+        <h3>Raya and the Last Dragon</h3>
+        <p>by McCarthy</p>
+        <button class="buy-btn" onclick='buyBook("Raya and the Last Dragon", "McCarthy", "raya.jpeg", 10.25)'>Buy Now</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Book Palace. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function buyBook(title, author, imgSrc, price) {
+      const book = {
+        title: title,
+        author: author,
+        imgSrc: imgSrc,
+        price: price
+      };
+      localStorage.setItem("selectedBook", JSON.stringify(book));
+      localStorage.setItem("bookQuantity", 1); // default
+      window.open("cart.html", "_blank");
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 30px;
+    }
+
+    .cart-box {
+      background: white;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    img {
+      width: 180px;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .info {
+      display: flex;
+      gap: 20px;
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .qty-controls {
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin: 0 5px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .buy-btn {
+      margin-top: 20px;
+      background: green;
+      color: white;
+    }
+
+    .qty-btn {
+      background: #ccc;
+    }
+
+    .total {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="cart-box" id="cartBox">
+    <h2>Your Cart</h2>
+    <div class="info">
+      <img id="bookImg" src="" alt="Book Image">
+      <div class="details">
+        <h3 id="bookTitle">Book Title</h3>
+        <p id="bookAuthor">Author</p>
+        <p>Price: $<span id="unitPrice">0.00</span></p>
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="decreaseQty()">-</button>
+          <span id="qty">1</span>
+          <button class="qty-btn" onclick="increaseQty()">+</button>
+        </div>
+        <p class="total">Total: $<span id="totalPrice">0.00</span></p>
+        <button class="buy-btn" onclick="goToBuy()">Proceed to Buy</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let quantity = 1;
+    let unitPrice = 0;
+
+    function loadBook() {
+      const bookData = localStorage.getItem("selectedBook");
+      if (!bookData) {
+        document.getElementById("cartBox").innerHTML = "<p>No book selected.</p>";
+        return;
+      }
+
+      const book = JSON.parse(bookData);
+
+      document.getElementById("bookTitle").textContent = book.title;
+      document.getElementById("bookAuthor").textContent = book.author;
+      document.getElementById("unitPrice").textContent = book.price;
+      document.getElementById("bookImg").src = book.imgSrc;
+
+      unitPrice = parseFloat(book.price);
+      updateTotal();
+    }
+
+    function updateTotal() {
+      document.getElementById("qty").textContent = quantity;
+      document.getElementById("totalPrice").textContent = (unitPrice * quantity).toFixed(2);
+    }
+
+    function increaseQty() {
+      quantity++;
+      updateTotal();
+    }
+
+    function decreaseQty() {
+      if (quantity > 1) {
+        quantity--;
+        updateTotal();
+      }
+    }
+
+    function goToBuy() {
+      window.location.href = "buy.html";
+    }
+
+    loadBook();
+  </script>
+
+   <div> <br>  <a href="index.html" class="btn">Go back</a></div>
+  </div>
+</body>
+</html>
